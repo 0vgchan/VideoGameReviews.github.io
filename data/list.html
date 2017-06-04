@@ -1,0 +1,205 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<!--Cтили и скрипты-->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+
+
+<style>
+*{font-size:16px;
+background-color : transparent;
+font-family: Roboto;
+}
+
+html{
+background-color : transparent;
+}
+
+body{
+
+cursor : default;
+background-color : #303640;
+color: #666666 !important;
+font-size: 14px;
+font-family: Roboto;
+
+line-height : 1.3;
+letter-spacing : 0;
+margin: 0;
+
+box-shadow: -20px 0 20px -20px #000 inset;
+}
+
+/* Скрытие */
+.cut >  input + .box {
+	display: inline;
+}
+.cut >  input:checked + .box {
+    display: none;
+}
+
+a{color:#fff;
+text-decoration:none; font-size:18px;}
+
+.reply{
+border-radius: 2px;}
+
+.container{
+display:block;}
+
+.switch{float:right;
+margin:0px 5px;
+cursor:pointer;}
+
+.board{display:block;
+padding-left:5px;}
+
+.spoiler_body {display:none;}
+.spoiler_links {cursor:pointer;}
+
+/* спойлер2 */
+.spoiler > input + label:after{content: "+";float: right;font-family: monospace;font-weight: bold;}
+.spoiler > input:checked + label:after{content: "-";float: right;font-family: monospace;font-weight: bold;}
+.spoiler > input{display:none;}
+.spoiler > input + label + .spoiler_body{display:none;}
+.spoiler > input:checked + label + .spoiler_body{display: block;}
+
+::-webkit-scrollbar{
+    width:0px;
+}
+
+.img {
+/* скругление углов */
+-webkit-border-radius: 8px;
+-moz-border-radius: 8px;
+-ms-border-radius: 8px;
+border-radius: 8px;
+   }
+
+.search2 input{
+      background: #2C333D;
+      border-color: #666666;
+      border-style: solid;
+      border-radius: 20px;
+	  color: #cccccc;
+      outline: none;
+      padding: 4px 10px;
+	  width: 180px;
+  background-image: url("img/search.png"); 
+  background-repeat: no-repeat; 
+  background-position: 95% 50%, 100% 100%;
+}
+.search2 input:focus {
+        border-color: #3CCD9D;
+        box-shadow: 0 0 3px #3CCD9D;
+		width: 180px;
+
+		transition:1s;
+}
+
+.ticket:hover { background-color: #3f434f; text-decoration: none; transition:0,5s;}
+</style>
+
+<link id="dyncss" rel="stylesheet" type="text/css" href=""> 
+  <script type="text/javascript"> 
+  function setDynCSS(url) { 
+  if (!arguments.length) { 
+  url = (url = document.cookie.match(/\bdyncss=([^;]*)/)) && url[1]; 
+  if (!url) return ''; 
+  } 
+  document.getElementById('dyncss').href = url; 
+  var d = new Date(); 
+  d.setFullYear(d.getFullYear() + 1); 
+  document.cookie = ['dyncss=', url, ';expires=', d.toGMTString(), ';path=/;'].join(''); 
+  return url; 
+  } 
+  setDynCSS(); 
+  </script>
+
+
+<script>
+   $(window).load(function () {
+    var c = jQuery.makeArray($("#sort div"));
+    c.sort(function (a, b) {
+        a = $(a).text();
+        b = $(b).text();
+        return a < b ? -1 : a > b ? 1 : 0
+    });
+    $(c).appendTo("#sort")
+}); 
+</script>
+
+
+</head>
+
+<body >
+<center>
+<div class="reply">
+
+</div>
+<img src="img/vg2.png" width="150" class="img1" alt="VG - Нулевые обзоры">
+
+<div class="search2">
+<div class="container-1">
+<span class="icon"><i class="fa fa-search"></i></span>
+<input type='search' id="search" title="Необходимо точное совпадение названия" placeholder="Найти"/>
+</div>
+</div>
+
+<hr color="#303640">	
+
+
+
+</center>
+<div id="master">
+
+<div class="reply"><div class="cut">
+<input class="cutpost" type="checkbox" value="vg1" title="Скрыть ✂️"><div class="box">Обзоры
+<hr color="#303640">
+ <div id="sort" class="container">
+<div class="ticket"><a alt="B" target="board" class="board" href="https://docs.google.com/document/d/1rryNPTghfHTbpb7Ls-eUsiRt5Fo95Ncr2pyoOXG5jUs/edit?usp=sharing">Battle Brothers</a></div>
+</div>
+</div></div></div>
+<hr color="#303640">
+
+<script>
+window.onload = function() {//onload begin
+   var inp = document.getElementById('search');
+  var find = function() {//find begin
+    var parent = document.getElementById('sort');
+    var divs = parent.getElementsByTagName('a');
+    len = divs.length;
+    for (var i = 0; i < len; i++) {//for begin
+      if (divs[i].childNodes.length == 1 && inp.value != divs[i].innerHTML && inp.value != '') {
+        divs[i].style.display = 'none';
+      } else if (divs[i].style.display != 'block') {
+        divs[i].style.display = 'block';
+      }
+    }//for end
+  }//find end
+  inp.onkeyup = function() {
+    find();
+  }
+}//onload end
+</script>
+
+</div>
+<script>
+(function(b) {
+var e = document.querySelectorAll("." + b),
+a = localStorage.getItem(b),
+a = (a = JSON.parse(a)) || (a = {}, localStorage.setItem(b, JSON.stringify(a)));
+[].forEach.call(e, function(c, d) {
+void 0 !== a[d] && (c.checked = a[d]);
+c.addEventListener("change", function() {
+a[d] = c.checked;
+localStorage.setItem(b, JSON.stringify(a))
+})
+})
+})("cutpost");
+</script>	
+<br>
+
+</body>
+</html>
